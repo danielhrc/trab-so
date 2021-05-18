@@ -1,0 +1,11 @@
+10
+James Sandero;12;15
+Jean Green;72;0
+Hank McCurtis;37;22
+ScottWinters;29;23
+James Sandero;22;25
+Will Garcia;21;15
+John Senna;102;0
+Patrick McNamara;54;0
+James Sullivan;77;0
+Howard Lovecraft;66;32
