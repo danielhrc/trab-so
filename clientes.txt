@@ -5,7 +5,7 @@ Hank McCurtis;37;22
 ScottWinters;29;23
 James Sandero;22;25
 Will Garcia;21;15
-John Senna;102;0
+John Senna;102;1
 Patrick McNamara;54;0
-James Sullivan;77;0
-Howard Lovecraft;66;32
+James Sullivan;77;3
+Howard Lovecraft;66;1

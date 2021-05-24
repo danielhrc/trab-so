@@ -137,7 +137,7 @@ public class Calendario {
     public void addMes(int meses){
         this.mes += meses;
         while (this.mes >= 12){
-            this.mes = this.mes - 12;
+            this.mes = this.mes - 11;
             this.ano ++;
         }
     }
@@ -178,4 +178,29 @@ public class Calendario {
                 "/" + ano + " " +
                horas +":" + minutos + ":" + segundos;
     }
+
+    public static int difMinutos(Calendario data, int diaAtual){
+        if(data.getHoras() == 8 && data.getMinutos() ==0)
+            return 0;
+        else{
+            int min = 0;
+            int horas = data.getHoras();
+            while (horas != 8){
+                horas--;
+                min += 60;
+            }
+            int minutos = data.getMinutos();
+            while (minutos != 0){
+                minutos--;
+                min ++;
+            }
+            int dias = data.getDia();
+            while (dias != diaAtual){
+                dias --;
+                min+= 1440;
+            }
+            return min;
+        }
+    }
 }
+
