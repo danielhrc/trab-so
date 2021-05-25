@@ -134,9 +134,9 @@ public class Main {
   
   public static void startCalendar() {
   	System.out.println("Data atual " + calendario.toString());
-      System.out.println(calendario.getHoras()); // O sistema verifica se está no horário de serviço da empresa, caso não esteja ele começa no outro dia
+      System.out.println("Hora de inicio do servico: " + calendario.getHoras() +" hs"); // O sistema verifica se está no horário de serviço da empresa, caso não esteja ele começa no outro dia
         if(calendario.getHoras() >= 17 || calendario.getHoras() < 8){
-          System.out.println("Fora do horario de servi�o.");
+          System.out.println("Fora do horario de servico.");
           calendario.addDias(1);
           calendario.setarDiaSemana(1);
           calendario.setHoras(8);
@@ -146,7 +146,7 @@ public class Main {
   }
   
   public static List<String> getClientes() {
-  	System.out.println("O empacotamento vai come�ar na data " + calendario.toString() + "\n");
+  	System.out.println("O empacotamento vai comecar na data " + calendario.toString() + "\n");
       List<String> clientesArq = new ArrayList<String>();
       clientesArq = FileSystem.ler("clientes.txt"); // le o arquivo clientes.txt, pega quantidade de pedidos e o remove da lista
       quantPedidos = Integer.valueOf(clientesArq.get(0));

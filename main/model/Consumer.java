@@ -31,10 +31,12 @@ public class  Consumer extends Thread {
                 // Semaforo lock
                 full.acquire();    //"down" do mutex de posições ocupadas
                 lock.acquire();    //"down do mutex
+                sleep(200);
 
                 horarios.get(horarios.size() -1)
                         .addTempo(5.5 * (Double.parseDouble(
                                 clientes.get(i).getQuantProdutos().toString())/20) - 0.5);
+                System.out.println(clientes.get(i));
 
                 // int next = random.nextInt(myList.size());  //-->depois do sorteio, a thread foi suspensa
                 // myList.remove(next);
