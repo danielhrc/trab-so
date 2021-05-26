@@ -1,0 +1,39 @@
+{{>_navbar}}
+{{>_msg}}
+<div class="container mt-4">
+    <h2>Leil-on</h2>
+    {{#if success}}
+    <div class="alert alert-success">{{msg}}</div>
+    {{/if}}
+    {{#if error}}
+    <div class="alert alert-danger">{{msg}}</div>
+    {{/if}}
+    <a href="#" class="list-group-item list-group-item-dark">
+        Transações
+    </a>
+    {{#each transactions}}
+    <div class="card text-white bg-dark mb-3">
+        <form action="/transaction/{{_id}}/{{involvedEmail}}/{{negotiatorEmail}}" method="POST">
+            <div class="card-body">
+                <h5 class="card-title">Negociação com {{involved}}</h5>
+                {{#if rated}}
+                <p class="card-text">Nota:{{note}}</p>
+                <div class="alert alert-success" style="max-width: 9rem;">Avaliado</div>
+                {{else}}
+                <div class="alert alert-danger" style="max-width: 9rem;">Não avaliado</div>
+                <input id="note" name="note" placeholder="Nota" type="number" max="5" min="1">
+                <button type="submit" class="btn btn-success">Avaliar</button>
+                {{/if}}
+            </div>
+        </form>
+
+
+    </div>
+    {{else}}
+    {{/each}}
+
+</div>
+<br>
+<br>
+<br>
+{{>_footer}}

@@ -1,0 +1,67 @@
+
+{{>_navbar}}
+{{>_msg}}
+<div class="container mt-4">
+  <div class="card" >
+    <div class="card">
+    <h5 class="card-header">{{name}}</h5> <div class="card-body">
+     <div class="container mt-4">
+                    <img src="{{image1}}" alt="img" width="200" height="200">
+                   {{#if image2}}
+                    <img src="{{image2}}" alt="img" width="200" height="200">
+                    {{/if}}
+
+                    {{#if image3}}
+                    <img src="{{image3}}" alt="img" width="200" height="200">
+                    {{/if}}
+
+                    {{#if image4}}
+                    <img src="{{image4}}" alt="img" width="200" height="200">
+                    {{/if}}
+                   
+             </div>
+             <br>
+    <h6 class="card-text">Descrição</h6>
+    <p class="card-text">{{description}}</p>
+    {{#if categorias}}
+       <h6 class="card-text">Categorias</h6>
+       <p class="card-text">{{categorias}}</p>
+    {{/if}}
+   
+    <h6 class="card-text">Preço</h6>
+    <p class="card-text">R$:{{price}}</p>
+    <h6 class="card-text">Maior lance</h6>
+    <p class="card-text">{{hightestbidder}}</p>      
+    <h6 class="card-text">Histórico de lances</h6>  
+    <p class="card-text">{{historic}}</p>        
+  
+    
+    <form action="/bid/{{name}}/{{linkedAuction}}" method="POST">
+    <input id="bid"  name="bid" placeholder="Dê seu lance">
+    <button class="btn btn-success">Dar Lance</button>
+    </form>
+<form action="/sendmsg/{{name}}/{{linkedAuction}}" method="POST">
+<div id="forum">
+   <hr style="height:2px;border-width:0;color:gray;background-color:gray"/>
+   
+  <h2>Fórum do(a) {{name}}</h2>
+ 
+  {{#each messages }}
+    <p>{{mensagem}}</p>
+  {{else}}
+  {{/each}}
+  <br>
+  <input type="text" name="msg" placeholder="Mensagem">
+  <button type="submit" class="btn btn-success" name="msg">Enviar mensagem</button>
+</div> 
+</form>
+  
+  </div>
+  
+</div>
+
+</div>
+</div>
+<br>
+        <br>
+        {{>_footer}}
