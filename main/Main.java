@@ -1,5 +1,6 @@
 import model.Cliente;
 import model.Empacotadora;
+import model.Empacotadoras;
 import utilitario.Calendario;
 import utilitario.FileSystem;
 
@@ -12,7 +13,7 @@ public class Main {
 
     public static int quantPedidos = 0;
     public static Calendario calendario = new Calendario();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
       String escalonamento = Menu();
       startCalendar();
       makeOption(escalonamento);
@@ -28,7 +29,7 @@ public class Main {
     	return leitor.next();
     }
     
-    public static void makeOption(String escalonamento) {
+    public static void makeOption(String escalonamento) throws InterruptedException {
     	switch (escalonamento) {
 			case "1": SRT();
 				break;
@@ -41,7 +42,7 @@ public class Main {
 		}
     }
     
-    public static void FilaSimples() {
+    public static void FilaSimples() throws InterruptedException {
     	List<String> clientesArq = getClientes();
     	List<Cliente> clientes = new ArrayList<Cliente>();
     	
@@ -53,12 +54,13 @@ public class Main {
         }
     	
         // Passa os clientes para a empacotadora seguindo a ordem de menor tempo primeiro
-        for (Cliente cliente: clientes) {
-             Empacotadora.empacotar(cliente, calendario);
-        }
+        new Empacotadoras(clientes);
+        // for (Cliente cliente: clientes) {
+        //     Empacotadora.empacotar(cliente, calendario);
+        // }
     }
     
-    public static void FCFS() {
+    public static void FCFS() throws InterruptedException {
     	List<String> clientesArq = getClientes();
     	List<Cliente> clientes = new ArrayList<Cliente>();
     	for (int i = 0; i < quantPedidos; i++){
@@ -66,13 +68,13 @@ public class Main {
             clientes.add(new Cliente(split[0], Integer.valueOf(split[1]), Integer.valueOf(split[2])));
             clientesArq.remove(0);
         }
-    	
-    	for (Cliente cliente: clientes) {
-            Empacotadora.empacotar(cliente, calendario);
-       }
+        new Empacotadoras(clientes);
+    	// for (Cliente cliente: clientes) {
+        //    Empacotadora.empacotar(cliente, calendario);
+        //}
     }
     
-    public static void SRT() {
+    public static void SRT() throws InterruptedException {
     	List<String> clientesArq = getClientes();
     	List<Cliente> clientes = new ArrayList<Cliente>();
     	
@@ -91,9 +93,13 @@ public class Main {
             }
         }
         // Passa os clientes para a empacotadora seguindo a ordem de menor tempo primeiro
-        for (Cliente cliente: clientes) {
-             Empacotadora.empacotar(cliente, calendario);
-        }
+        new Empacotadoras(clientes);
+
+
+
+        // for (Cliente cliente: clientes) {
+        //     Empacotadora.empacotar(cliente, calendario);
+        //}
   }
 
   // Função para organizar a lista com os clientes com menos produtos primeiro
@@ -128,9 +134,9 @@ public class Main {
   
   public static void startCalendar() {
   	System.out.println("Data atual " + calendario.toString());
-      System.out.println(calendario.getHoras()); // O sistema verifica se está no horário de serviço da empresa, caso não esteja ele começa no outro dia
+      System.out.println("Hora de inicio do servico: " + calendario.getHoras() +" hs"); // O sistema verifica se está no horário de serviço da empresa, caso não esteja ele começa no outro dia
         if(calendario.getHoras() >= 17 || calendario.getHoras() < 8){
-          System.out.println("Fora do horario de servi�o.");
+          System.out.println("Fora do horario de servico.");
           calendario.addDias(1);
           calendario.setarDiaSemana(1);
           calendario.setHoras(8);
@@ -140,7 +146,7 @@ public class Main {
   }
   
   public static List<String> getClientes() {
-  	System.out.println("O empacotamento vai come�ar na data " + calendario.toString() + "\n");
+  	System.out.println("O empacotamento vai comecar na data " + calendario.toString() + "\n");
       List<String> clientesArq = new ArrayList<String>();
       clientesArq = FileSystem.ler("clientes.txt"); // le o arquivo clientes.txt, pega quantidade de pedidos e o remove da lista
       quantPedidos = Integer.valueOf(clientesArq.get(0));

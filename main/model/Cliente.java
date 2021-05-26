@@ -19,7 +19,7 @@ public class Cliente {
 
     public void setNome(String nome) { this.nome = nome; }
 
-    public int getQuantProdutos() { return quantProdutos; }
+    public Integer getQuantProdutos() { return quantProdutos; }
 
     public void setQuantProdutos(int quantProdutos) { this.quantProdutos = quantProdutos; }
 

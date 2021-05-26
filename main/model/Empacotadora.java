@@ -5,6 +5,8 @@ import utilitario.Calendario;
 
 public class Empacotadora {
 
+    public Empacotadora(){};
+
     // Essa função recebe um cliente e uma data, calcula o tempo de empacotamento do cliente e retorna
     public static Calendario empacotar(Cliente cliente, Calendario data){
         System.out.println("O cliente " + cliente.getNome() + " tem " + cliente.getQuantProdutos() + " produtos para empacotar.");
