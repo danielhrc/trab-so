@@ -13,7 +13,7 @@ public class  Consumer extends Thread {
     private Double horario;
 
     public Consumer(List<Cliente> clientes, Semaphore sem, Semaphore count, int op) {
-        clientes = clientes;
+        this.clientes = clientes;
         lock = sem;
         full = count;
         numOp = op;
@@ -32,6 +32,9 @@ public class  Consumer extends Thread {
                 full.acquire();    //"down" do mutex de posições ocupadas
                 lock.acquire();    //"down do mutex
                 sleep(200);
+
+                System.out.println("i: " + i);
+                System.out.println(clientes.size());
 
                 horarios.get(horarios.size() -1)
                         .addTempo(5.5 * (Double.parseDouble(
