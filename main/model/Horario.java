@@ -6,9 +6,7 @@ public class Horario {
 
     public Horario(){};
 
-    public void addTempo(double v) {
-        this.tempo = this.tempo + v;
-    }
+    public void addTempo(double v) { this.tempo += v; }
 
     public double getTempo() {
         return this.tempo;

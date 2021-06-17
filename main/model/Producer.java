@@ -21,12 +21,12 @@ public class Producer extends Thread{
     public void run(){
 
         for(int i=0; i<numOp; i++){
-           // int next = random.nextInt(this.numOp*130/100);
+            // int next = random.nextInt(this.numOp*130/100);
             try{
                 //Lockar
                 lock.acquire();      /// "down" do mutex da região crítica
                 // Fila --> manda pra cada
-              //  myList.add(next);
+                //  myList.add(next);
 
                 full.release();   /// "up" do semáforo de posições ocupadas
                 lock.release();
