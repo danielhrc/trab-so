@@ -16,12 +16,12 @@ public class Producer extends Thread{
         full = count;
         numOp = op;
     }
-
     @Override
     public void run(){
-
+        System.out.println("NumOP:" + numOp);
         for(int i=0; i<numOp; i++){
             // int next = random.nextInt(this.numOp*130/100);
+
             try{
                 //Lockar
                 lock.acquire();      /// "down" do mutex da região crítica

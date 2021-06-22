@@ -12,10 +12,11 @@ public class Empacotadoras extends Thread{
         Semaphore listLock = new Semaphore(1);    //mutex para acesso à lista
         Semaphore countItems = new Semaphore(0);
 
+        int tamTotal = list.size() + listPost.size();
         /* THREADS */
-        Producer prod = new Producer(list, listLock, countItems, list.size());
-        Consumer empacotadora1 = new Consumer(list, listLock, countItems, list.size()/2);
-        Consumer empacotadora2 = new Consumer(list, listLock, countItems, list.size()/2);
+        Producer prod = new Producer(list, listLock, countItems, tamTotal );
+        Consumer empacotadora1 = new Consumer(list, listPost,listLock, countItems, tamTotal / 2);
+        Consumer empacotadora2 = new Consumer(list, listPost,listLock, countItems, tamTotal / 2);
         /* FIM THREADS */
 
         try{
@@ -31,11 +32,4 @@ public class Empacotadoras extends Thread{
         tempoTotal = empacotadora1.getHorario() > empacotadora2.getHorario() ? empacotadora1.getHorario() : empacotadora2.getHorario();
         System.out.println("Tempo: " + tempoTotal);
     };
-
-
-
-
-
-
-
 }

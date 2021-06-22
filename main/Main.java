@@ -1,4 +1,5 @@
 import model.Cliente;
+import model.Container;
 import model.Empacotadoras;
 import utilitario.Calendario;
 import utilitario.FileSystem;
@@ -10,10 +11,20 @@ public class Main {
 
     public static int quantPedidos = 0;
     public static Calendario calendario = new Calendario();
+    public  static List<Container> containers = new ArrayList<Container>();
     public static void main(String[] args) throws InterruptedException {
         String escalonamento = Menu();
         startCalendar();
+        // Iniciar container
+       // generateContainer();
         makeOption(escalonamento);
+    }
+
+    private static void generateContainer() {
+        List<String> produtos = getProdutos();
+        for (int i = 0; i < 4; i ++){
+            containers.add(new Container(1,1));
+        }
     }
 
     public static String Menu() {
@@ -148,5 +159,14 @@ public class Main {
         clientesArq.remove(0); // Remove a primeira posição que indicava a quantidade
 
         return clientesArq;
+    }
+
+    public static List<String> getProdutos(){
+        // Lendo o arquivo de produtos e arrumando os containers
+        List<String> produtosArq;
+        produtosArq = FileSystem.ler("produtos.txt");
+        int quantProdutos = Integer.parseInt(produtosArq.get(0));
+        produtosArq.remove(0);
+        return produtosArq;
     }
 }
