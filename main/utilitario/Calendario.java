@@ -4,12 +4,14 @@ import java.util.Date;
 public class Calendario {
 
     // Classe que irá controlar o tempo
-    private int dia,mes,ano,horas, minutos;
+    private int dia,mes,ano,horas, minutos, antesMeioDia, foraPrazo;
     private String diaSemana;
     private double segundos;
     // Construtor pega os dados da data atual do sistema
     public Calendario(){
         Date data = new Date();
+        this.antesMeioDia = 0;
+        this.foraPrazo = 0;
         this.dia = data.getDate();
         this.mes = data.getMonth() + 1;
         this.ano = data.getYear() + 1900;
@@ -137,7 +139,7 @@ public class Calendario {
     public void addMes(int meses){
         this.mes += meses;
         while (this.mes >= 12){
-            this.mes = this.mes - 12;
+            this.mes = this.mes - 11;
             this.ano ++;
         }
     }
@@ -147,6 +149,14 @@ public class Calendario {
     public int getMes() { return mes; }
 
     public int getAno() { return ano; }
+
+    public int getAntesMeioDia() { return antesMeioDia; }
+
+    public void addAntesMeioDia() { this.antesMeioDia ++; }
+
+    public int getForaPrazo() { return foraPrazo; }
+
+    public void addForaPrazo() { this.foraPrazo ++; }
 
     public int getHoras() { return horas; }
 
@@ -170,6 +180,13 @@ public class Calendario {
 
     public void setSegundos(double segundos) { this.segundos = segundos; }
 
+    public void zerarCalendario(){
+        this.setarDiaSemana(1);
+        this.setHoras(8);
+        this.setMinutos(0);
+        this.setSegundos(0);
+    }
+
     @Override
     public String toString() {
         return diaSemana + " "+
@@ -178,4 +195,24 @@ public class Calendario {
                 "/" + ano + " " +
                horas +":" + minutos + ":" + segundos;
     }
+
+    public static int difMinutos(Calendario data){
+        if(data.getHoras() == 8 && data.getMinutos() ==0)
+            return 0;
+        else{
+            int min = 0;
+            int horas = data.getHoras();
+            while (horas != 8){
+                horas--;
+                min += 60;
+            }
+            int minutos = data.getMinutos();
+            while (minutos != 0){
+                minutos--;
+                min ++;
+            }
+            return min;
+        }
+    }
 }
+
